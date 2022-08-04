@@ -3,7 +3,9 @@
   "version": 2,
   "projects": {
     "admin-service": "apps/admin-service",
+    "components": "packages/components",
     "dashboard": "apps/dashboard",
+    "layouts": "packages/layouts",
     "support": "apps/support"
   }
 }

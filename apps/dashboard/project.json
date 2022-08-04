@@ -23,7 +23,8 @@
         ],
         "styles": [],
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "webpackConfig": "@nrwl/react/plugins/webpack",
+        "postcssConfig": "apps/{your app here}/postcss.config.js"
       },
       "configurations": {
         "development": {

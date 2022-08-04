@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
-import NxWelcome from './nx-welcome';
 
 import { Route, Routes, Link } from 'react-router-dom';
+
+import { Button } from '@mui/material';
+import { DashboardLayout } from '@octalogic-admin/layouts';
 
 const StyledApp = styled.div`
   // Your style here
@@ -10,8 +12,8 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <StyledApp>
-      <NxWelcome title="dashboard" />
-
+      <DashboardLayout />
+      
       {/* START: routes */}
       {/* These routes and navigation have been generated for you */}
       {/* Feel free to move and update them to fit your needs */}
@@ -28,6 +30,7 @@ export function App() {
           </li>
         </ul>
       </div>
+      <Button variant="contained" color="primary">Material UI</Button>
       <Routes>
         <Route
           path="/"
