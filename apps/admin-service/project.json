@@ -52,6 +52,22 @@
         "jestConfig": "apps/admin-service/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "deploy:develop": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [],
+        "cwd": "apps/admin-service",
+        "parallel": false
+      }
+    },
+    "deploy:prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [],
+        "cwd": "apps/admin-service",
+        "parallel": false
+      }
     }
   },
   "tags": []

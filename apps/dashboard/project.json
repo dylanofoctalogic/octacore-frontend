@@ -5,13 +5,11 @@
   "targets": {
     "build": {
       "executor": "@nrwl/web:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/dashboard",
+        "outputPath": "apps/dashboard/dist",
         "index": "apps/dashboard/src/index.html",
         "baseHref": "/",
         "main": "apps/dashboard/src/main.tsx",
@@ -28,9 +26,9 @@
       },
       "configurations": {
         "development": {
-          "extractLicenses": false,
-          "optimization": false,
+          "optimization": true,
           "sourceMap": true,
+          "extractLicenses": false,
           "vendorChunk": true
         },
         "production": {
@@ -45,7 +43,7 @@
           "sourceMap": false,
           "namedChunks": false,
           "extractLicenses": true,
-          "vendorChunk": false
+          "vendorChunk": true
         }
       }
     },
@@ -69,23 +67,40 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/dashboard/**/*.{ts,tsx,js,jsx}"
-        ]
+        "lintFilePatterns": ["apps/dashboard/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/dashboard"
-      ],
+      "outputs": ["coverage/apps/dashboard"],
       "options": {
         "jestConfig": "apps/dashboard/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "deploy:develop": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "cp robots.txt dist/robots.txt",
+          "echo should_deploy=true >> $GITHUB_ENV"
+        ],
+        "cwd": "apps/dashboard",
+        "parallel": false
+      }
+    },
+    "deploy:prod": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "cp robots.txt dist/robots.txt",
+          "npm install -g firebase-tools",
+          "firebase deploy -P prod --only hosting:prod"
+        ],
+        "cwd": "apps/dashboard",
+        "parallel": false
       }
     }
   },

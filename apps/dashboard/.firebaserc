@@ -1,0 +1,22 @@
+{
+  "projects": {
+    "default": "octalogic-portfolio-dev",
+    "prod": "octalogic-portfolio"
+  },
+  "targets": {
+    "octalogic-portfolio-dev": {
+      "hosting": {
+        "develop": [
+          "admin-portfolio-next"
+        ]
+      }
+    },
+    "octalogic-portfolio": {
+      "hosting": {
+        "prod": [
+          "portfolio-next"
+        ]
+      }
+    }
+  }
+}

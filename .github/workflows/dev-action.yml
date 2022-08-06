@@ -1,0 +1,53 @@
+name: Deployment_Development
+
+on:
+  # push:
+  #   branches:
+  #     - 'features/nx'
+  pull_request:
+    branches:
+      - 'develop-nx'
+    types: [closed]
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v3
+        id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: |
+          npm ci
+
+      - name: Build
+        uses: mansagroup/nrwl-nx-action@v2
+        with:
+          targets: build,deploy:develop
+          projects: dashboard
+
+      - name: Deploy to Firebase
+        if: env.should_deploy == 'true'
+        uses: w9jds/firebase-action@v2.2.2
+        with:
+          args: deploy -P default --only hosting:develop
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_PATH: ./apps/dashboard
