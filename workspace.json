@@ -4,6 +4,7 @@
   "projects": {
     "admin-service": "apps/admin-service",
     "components": "packages/components",
+    "constants": "packages/constants",
     "dashboard": "apps/dashboard",
     "layouts": "packages/layouts",
     "support": "apps/support"

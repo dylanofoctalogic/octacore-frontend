@@ -1,16 +1,72 @@
-import { Box } from '@mui/material';
-import { Header, Sidebar } from '@octalogic-admin/components';
+import * as React from 'react';
+import { Box, CssBaseline, Toolbar } from '@mui/material';
+import { AppSidebar, Header, Sidebar } from '@octalogic-admin/components';
+
+const sidebarWidth = 240;
+const appSidebarWidth = 75;
 
 /* eslint-disable-next-line */
-export interface DashboardLayoutProps {}
+export interface DashboardLayoutProps {
+  children: JSX.Element;
+}
 
 export function DashboardLayout(props: DashboardLayoutProps) {
+  const { children } = props;
+  const [mobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
+  const [appSidebarOpen, setAppSidebarOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileSidebarOpen(!mobileSidebarOpen);
+  };
+
+  const handleAppSidebarToggle = () => {
+    setAppSidebarOpen(!appSidebarOpen);
+  };
+
   return (
     <Box>
-      <Header />
-      <Sidebar />
-      <div className="h-10 w-10 bg-black" />
-      <h1>Welcome to DashboardLayout!</h1>
+      <CssBaseline />
+      <Header
+        handleDrawerToggle={handleDrawerToggle}
+        handleAppSidebarToggle={handleAppSidebarToggle}
+      />
+      <Box
+        component="nav"
+        sx={{ width: { sm: sidebarWidth }, flexShrink: { sm: 0 } }}
+        aria-label="mailbox folders"
+      >
+        <Sidebar
+          handleDrawerToggle={handleDrawerToggle}
+          mobileSidebarOpen={mobileSidebarOpen}
+          sidebarWidth={sidebarWidth}
+        />
+      </Box>
+      <Box
+        component="main"
+        sx={{
+          marginLeft: {
+            xs: 0,
+            md: `${sidebarWidth}px`,
+          },
+        }}
+      >
+        <Toolbar />
+        <Box
+          sx={{
+            padding: {
+              xs: 2,
+              md: 4,
+            },
+          }}
+        >
+          {children}
+        </Box>
+      </Box>
+      <AppSidebar
+        handleAppSidebarToggle={handleAppSidebarToggle}
+        appSidebarOpen={appSidebarOpen}
+        appSidebarWidth={appSidebarWidth}
+      />
     </Box>
   );
 }

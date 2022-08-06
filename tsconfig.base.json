@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@octalogic-admin/components": ["packages/components/src/index.ts"],
+      "@octalogic-admin/constants": ["packages/constants/src/index.ts"],
       "@octalogic-admin/layouts": ["packages/layouts/src/index.ts"]
     }
   },
