@@ -4,12 +4,13 @@ import { DashboardLayout } from '@octalogic-admin/layouts';
 
 import Landing from './pages/landing/landing';
 import Customers from './pages/customers/customers';
+import { dashboardRoutes } from '@octalogic-admin/constants';
 
 export function Router() {
   return (
     <Routes>
       <Route
-        path="/"
+        path={dashboardRoutes.home}
         element={
           <DashboardLayout>
             <Landing />
@@ -17,7 +18,7 @@ export function Router() {
         }
       />
       <Route
-        path="/customers"
+        path={dashboardRoutes.customers}
         element={
           <DashboardLayout>
             <Customers />

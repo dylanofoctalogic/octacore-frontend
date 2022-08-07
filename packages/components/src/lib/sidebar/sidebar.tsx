@@ -1,20 +1,10 @@
 import * as React from 'react';
-// import PropTypes from 'prop-types';
-// import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-// import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-// import IconButton from '@mui/material/IconButton';
-// import InboxIcon from '@mui/icons-material/MoveToInbox';
-// import List from '@mui/material/List';
-// import ListItem from '@mui/material/ListItem';
-// import ListItemButton from '@mui/material/ListItemButton';
-// import ListItemIcon from '@mui/material/ListItemIcon';
-// import ListItemText from '@mui/material/ListItemText';
-// import MailIcon from '@mui/icons-material/Mail';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import Toolbar from '@mui/material/Toolbar';
-// import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { Box, Drawer, List } from '@mui/material';
+import { dashboardSidebarConfig } from '@octalogic-admin/constants';
+import SidebarItem from '../sidebar-item/sidebar-item';
 
 /* eslint-disable-next-line */
 export interface SidebarProps {
@@ -25,35 +15,46 @@ export interface SidebarProps {
 
 export function Sidebar(props: SidebarProps) {
   const { mobileSidebarOpen, handleDrawerToggle, sidebarWidth } = props;
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isLarge = useMediaQuery(theme.breakpoints.up('md'));
+
+  const navigateTo = (path: string) => {
+    navigate(path);
+  };
 
   return (
     <Box>
       <Drawer
-        variant="temporary"
-        open={mobileSidebarOpen}
+        variant={isLarge ? 'permanent' : 'temporary'}
+        open={isLarge ? true : mobileSidebarOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          display: { xs: 'block', md: 'none' },
+          display: {
+            xs: isLarge ? 'none' : 'block',
+            md: isLarge ? 'block' : 'none',
+          },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: sidebarWidth,
           },
         }}
-      ></Drawer>
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: 'none', md: 'block' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            width: sidebarWidth,
-          },
-        }}
-        open
-      ></Drawer>
+      >
+        <List>
+          {dashboardSidebarConfig.map((item, index) => (
+            <SidebarItem
+              key={index}
+              icon={item.icon}
+              label={item.label}
+              path={item.path}
+              navigateTo={navigateTo}
+            />
+          ))}
+        </List>
+      </Drawer>
     </Box>
   );
 }

@@ -1,4 +1,6 @@
 import Drawer from '@mui/material/Drawer';
+import { appSidebarConfig } from '@octalogic-admin/constants';
+import AppSidebarItem from '../app-sidebar-item/app-sidebar-item';
 
 /* eslint-disable-next-line */
 export interface AppSidebarProps {
@@ -9,6 +11,11 @@ export interface AppSidebarProps {
 
 export function AppSidebar(props: AppSidebarProps) {
   const { appSidebarOpen, handleAppSidebarToggle, appSidebarWidth } = props;
+
+  const navigateTo = (path: string) => {
+    window.location.href = path;
+  };
+
   return (
     <Drawer
       variant="temporary"
@@ -25,7 +32,17 @@ export function AppSidebar(props: AppSidebarProps) {
           width: appSidebarWidth,
         },
       }}
-    ></Drawer>
+    >
+      {appSidebarConfig.map((item, index) => (
+        <AppSidebarItem
+          key={index}
+          icon={item.icon}
+          label={item.label}
+          path={item.path || '#'}
+          navigateTo={navigateTo}
+        />
+      ))}
+    </Drawer>
   );
 }
 

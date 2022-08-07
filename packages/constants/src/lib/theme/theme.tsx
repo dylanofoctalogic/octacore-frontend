@@ -20,7 +20,10 @@ const theme = createTheme({
     primary: {
       main: cyan[200],
       light: cyan[100],
-      dark: cyan[300],
+      dark: cyan[500],
+    },
+    background: {
+      default: grey[200],
     },
   },
   components: {
@@ -31,7 +34,7 @@ const theme = createTheme({
           right: '1rem',
           top: '1rem',
           width: 'auto',
-          borderRadius: '12px',
+          opacity: '0.8',
         },
       },
     },
@@ -40,11 +43,20 @@ const theme = createTheme({
         paperAnchorLeft: {
           top: '6rem',
           left: '1rem',
-          borderRadius: '12px',
+          bottom: '1rem',
+          height: 'auto',
         },
         paperAnchorRight: {
           top: '6rem',
           right: '1rem',
+          bottom: '1rem',
+          height: 'auto',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
           borderRadius: '12px',
         },
       },

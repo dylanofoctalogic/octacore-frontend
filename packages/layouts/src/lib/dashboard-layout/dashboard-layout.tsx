@@ -17,10 +17,12 @@ export function DashboardLayout(props: DashboardLayoutProps) {
 
   const handleDrawerToggle = () => {
     setMobileSidebarOpen(!mobileSidebarOpen);
+    setAppSidebarOpen(false);
   };
 
   const handleAppSidebarToggle = () => {
     setAppSidebarOpen(!appSidebarOpen);
+    setMobileSidebarOpen(false);
   };
 
   return (
@@ -56,6 +58,10 @@ export function DashboardLayout(props: DashboardLayoutProps) {
             padding: {
               xs: 2,
               md: 4,
+            },
+            paddingTop: {
+              xs: 4,
+              md: 6,
             },
           }}
         >
