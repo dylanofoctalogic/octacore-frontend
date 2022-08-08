@@ -3,8 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import { DashboardLayout } from '@octalogic-admin/layouts';
 
 import Landing from './pages/landing/landing';
-import Customers from './pages/customers/customers';
+import Clients from './pages/clients/clients';
 import { dashboardRoutes } from '@octalogic-admin/constants';
+import Categories from './pages/categories/categories';
+import Technologies from './pages/technologies/technologies';
+import Projects from './pages/projects/projects';
 
 export function Router() {
   return (
@@ -18,10 +21,34 @@ export function Router() {
         }
       />
       <Route
-        path={dashboardRoutes.customers}
+        path={dashboardRoutes.categories}
         element={
           <DashboardLayout>
-            <Customers />
+            <Categories />
+          </DashboardLayout>
+        }
+      />
+      <Route
+        path={dashboardRoutes.technologies}
+        element={
+          <DashboardLayout>
+            <Technologies />
+          </DashboardLayout>
+        }
+      />
+      <Route
+        path={dashboardRoutes.clients}
+        element={
+          <DashboardLayout>
+            <Clients />
+          </DashboardLayout>
+        }
+      />
+      <Route
+        path={dashboardRoutes.projects.all}
+        element={
+          <DashboardLayout>
+            <Projects />
           </DashboardLayout>
         }
       />

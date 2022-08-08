@@ -2,26 +2,23 @@ import { include } from 'named-urls';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupIcon from '@mui/icons-material/Group';
+import ImportantDevicesIcon from '@mui/icons-material/ImportantDevices';
+import CodeIcon from '@mui/icons-material/Code';
+import CategoryIcon from '@mui/icons-material/Category';
+import DevicesIcon from '@mui/icons-material/Devices';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 const dashboardRoutes = {
-  // simple route
   home: '/',
-
-  // route with params
-  customers: '/customers',
-
-  // Routes with params
-  // messages: include('/messages', {
-  //   all: '',
-  //   unread: 'unread/',
-
-  //   // nesting of includes is allowed
-  //   detail: include(':messageId/', {
-  //     show: '',
-  //     edit: 'edit/',
-  //     comments: 'comments/',
-  //   }),
-  // }),
+  clients: '/clients',
+  categories: '/categories',
+  technologies: '/technologies',
+  projects: include('/projects', {
+    all: '',
+    detail: include(':projectId', {
+      show: '',
+    }),
+  }),
 };
 
 const dashboardSidebarConfig = [
@@ -31,9 +28,60 @@ const dashboardSidebarConfig = [
     label: 'Dashboard',
   },
   {
-    path: dashboardRoutes.customers,
+    path: dashboardRoutes.categories,
+    icon: <CategoryIcon />,
+    label: 'Categories',
+  },
+  {
+    path: dashboardRoutes.technologies,
+    icon: <CodeIcon />,
+    label: 'Technologies',
+  },
+  {
+    path: dashboardRoutes.clients,
     icon: <GroupIcon />,
-    label: 'Customers',
+    label: 'Clients',
+  },
+  {
+    path: dashboardRoutes.projects.all,
+    icon: <DevicesIcon />,
+    label: 'Projects',
+  },
+];
+
+const portfolioRoutes = {
+  home: '/',
+  portfolios: 'portfolios',
+};
+
+const portfolioSidebarConfig = [
+  {
+    path: portfolioRoutes.home,
+    icon: <DashboardIcon />,
+    label: 'Dashboard',
+  },
+  {
+    path: portfolioRoutes.portfolios,
+    icon: <ImportantDevicesIcon />,
+    label: 'Portfolios',
+  },
+];
+
+const supportRoutes = {
+  home: '/',
+  tickets: 'tickets',
+};
+
+const supportSidebarConfig = [
+  {
+    path: supportRoutes.home,
+    icon: <DashboardIcon />,
+    label: 'Dashboard',
+  },
+  {
+    path: supportRoutes.tickets,
+    icon: <SupportAgentIcon />,
+    label: 'Tickets',
   },
 ];
 
@@ -44,10 +92,23 @@ const appSidebarConfig = [
     label: 'Dashboard',
   },
   {
+    path: process.env['NX_PORTFOLIO_WEBAPP_URL'],
+    icon: <ImportantDevicesIcon />,
+    label: 'Portfolio',
+  },
+  {
     path: process.env['NX_SUPPORT_WEBAPP_URL'],
     icon: <GroupIcon />,
     label: 'Support',
   },
 ];
 
-export { appSidebarConfig, dashboardRoutes, dashboardSidebarConfig };
+export {
+  appSidebarConfig,
+  dashboardRoutes,
+  dashboardSidebarConfig,
+  portfolioRoutes,
+  portfolioSidebarConfig,
+  supportRoutes,
+  supportSidebarConfig,
+};

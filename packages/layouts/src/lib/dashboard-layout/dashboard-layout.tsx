@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box, CssBaseline, Toolbar } from '@mui/material';
 import { AppSidebar, Header, Sidebar } from '@octalogic-admin/components';
 
+
 const sidebarWidth = 240;
 const appSidebarWidth = 75;
 
@@ -14,6 +15,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
   const { children } = props;
   const [mobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
   const [appSidebarOpen, setAppSidebarOpen] = React.useState(false);
+  
 
   const handleDrawerToggle = () => {
     setMobileSidebarOpen(!mobileSidebarOpen);
@@ -24,6 +26,8 @@ export function DashboardLayout(props: DashboardLayoutProps) {
     setAppSidebarOpen(!appSidebarOpen);
     setMobileSidebarOpen(false);
   };
+
+  // appSidebarConfig;
 
   return (
     <Box>
