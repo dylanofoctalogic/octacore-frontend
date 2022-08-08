@@ -9,6 +9,10 @@ import DevicesIcon from '@mui/icons-material/Devices';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 const dashboardRoutes = {
+  authentication: include('/authentication', {
+    login: 'login',
+    forgotPassword: 'forgot-password',
+  }),
   home: '/',
   clients: '/clients',
   categories: '/categories',
@@ -85,25 +89,32 @@ const supportSidebarConfig = [
   },
 ];
 
+const appRoutes = {
+  core: process.env['NX_CORE_WEBAPP_URL'],
+  portfolio: process.env['NX_PORTFOLIO_WEBAPP_URL'],
+  support: process.env['NX_SUPPORT_WEBAPP_URL'],
+};
+
 const appSidebarConfig = [
   {
-    path: process.env['NX_CORE_WEBAPP_URL'],
+    path: appRoutes.core,
     icon: <DashboardIcon />,
     label: 'Dashboard',
   },
   {
-    path: process.env['NX_PORTFOLIO_WEBAPP_URL'],
+    path: appRoutes.portfolio,
     icon: <ImportantDevicesIcon />,
     label: 'Portfolio',
   },
   {
-    path: process.env['NX_SUPPORT_WEBAPP_URL'],
+    path: appRoutes.support,
     icon: <GroupIcon />,
     label: 'Support',
   },
 ];
 
 export {
+  appRoutes,
   appSidebarConfig,
   dashboardRoutes,
   dashboardSidebarConfig,

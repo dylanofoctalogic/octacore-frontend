@@ -1,15 +1,20 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+import { useSnackbar } from 'notistack';
+
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  MenuItem,
+} from '@mui/material';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import AppsIcon from '@mui/icons-material/Apps';
+import { appRoutes, dashboardRoutes } from '@octalogic-admin/constants';
 
 /* eslint-disable-next-line */
 export interface HeaderProps {
@@ -18,6 +23,7 @@ export interface HeaderProps {
 }
 
 export function Header(props: HeaderProps) {
+  const { enqueueSnackbar } = useSnackbar();
   const [anchorEl, setAnchorEl] = React.useState<null | Element>(null);
 
   const { handleDrawerToggle, handleAppSidebarToggle } = props;
@@ -30,6 +36,13 @@ export function Header(props: HeaderProps) {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    setAnchorEl(null);
+    enqueueSnackbar('That was easy!', { variant: 'default' });
+    const path = `${appRoutes.core}${dashboardRoutes.authentication.login}`;
+    window.location.href = path;
   };
 
   const menuId = 'primary-search-account-menu';
@@ -51,6 +64,7 @@ export function Header(props: HeaderProps) {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 

@@ -1,12 +1,11 @@
-import { ThemeProvider } from '@mui/material';
-import { theme } from '@octalogic-admin/constants';
+import { OctalogicAppProvider } from '@octalogic-admin/components';
 import { Router } from '../router';
 
 export function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <OctalogicAppProvider>
       <Router />
-    </ThemeProvider>
+    </OctalogicAppProvider>
   );
 }
 
