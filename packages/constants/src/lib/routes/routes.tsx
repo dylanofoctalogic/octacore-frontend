@@ -12,6 +12,7 @@ const dashboardRoutes = {
   authentication: include('/authentication', {
     login: 'login',
     forgotPassword: 'forgot-password',
+    profile: 'profile',
   }),
   home: '/',
   clients: '/clients',

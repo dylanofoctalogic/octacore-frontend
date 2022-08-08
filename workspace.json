@@ -6,6 +6,7 @@
     "components": "packages/components",
     "constants": "packages/constants",
     "dashboard": "apps/dashboard",
+    "hooks": "packages/hooks",
     "layouts": "packages/layouts",
     "portfolio": "apps/portfolio",
     "support": "apps/support"

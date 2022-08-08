@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-
+import { SignIn, SignedIn, UserProfile, SignedOut } from '@clerk/clerk-react';
 import { DashboardLayout, EmptyLayout } from '@octalogic-admin/layouts';
 
 import Landing from './pages/landing/landing';
@@ -14,12 +14,27 @@ import { PageNotFound } from '@octalogic-admin/components';
 export function Router() {
   return (
     <Routes>
-      <Route
+      {/* <Route
         path={dashboardRoutes.authentication.login}
         element={
           <EmptyLayout>
             <Login />
           </EmptyLayout>
+        }
+      /> */}
+
+      <Route
+        path={dashboardRoutes.authentication.login}
+        element={
+          <SignedOut>
+            <EmptyLayout>
+              <SignIn
+                routing="path"
+                path={dashboardRoutes.authentication.login}
+                redirectUrl={dashboardRoutes.home}
+              />
+            </EmptyLayout>
+          </SignedOut>
         }
       />
       <Route
@@ -60,6 +75,20 @@ export function Router() {
           <DashboardLayout>
             <Projects />
           </DashboardLayout>
+        }
+      />
+
+      <Route
+        path={dashboardRoutes.authentication.profile}
+        element={
+          <SignedIn>
+            <EmptyLayout>
+              <UserProfile
+                routing="path"
+                path={dashboardRoutes.authentication.profile}
+              />
+            </EmptyLayout>
+          </SignedIn>
         }
       />
       <Route

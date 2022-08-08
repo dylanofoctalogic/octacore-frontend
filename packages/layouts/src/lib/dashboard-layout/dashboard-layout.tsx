@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { SignedIn } from '@clerk/clerk-react';
 import { Box, Toolbar } from '@mui/material';
 import { AppSidebar, Header, Sidebar } from '@octalogic-admin/components';
 
@@ -28,53 +29,55 @@ export function DashboardLayout(props: DashboardLayoutProps) {
   // appSidebarConfig;
 
   return (
-    <Box>
-      <Header
-        handleDrawerToggle={handleDrawerToggle}
-        handleAppSidebarToggle={handleAppSidebarToggle}
-      />
-      <Box
-        component="nav"
-        sx={{ width: { sm: sidebarWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        <Sidebar
+    <SignedIn>
+      <Box>
+        <Header
           handleDrawerToggle={handleDrawerToggle}
-          mobileSidebarOpen={mobileSidebarOpen}
-          sidebarWidth={sidebarWidth}
+          handleAppSidebarToggle={handleAppSidebarToggle}
         />
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          marginLeft: {
-            xs: 0,
-            md: `${sidebarWidth}px`,
-          },
-        }}
-      >
-        <Toolbar />
         <Box
+          component="nav"
+          sx={{ width: { sm: sidebarWidth }, flexShrink: { sm: 0 } }}
+          aria-label="mailbox folders"
+        >
+          <Sidebar
+            handleDrawerToggle={handleDrawerToggle}
+            mobileSidebarOpen={mobileSidebarOpen}
+            sidebarWidth={sidebarWidth}
+          />
+        </Box>
+        <Box
+          component="main"
           sx={{
-            padding: {
-              xs: 2,
-              md: 4,
-            },
-            paddingTop: {
-              xs: 4,
-              md: 6,
+            marginLeft: {
+              xs: 0,
+              md: `${sidebarWidth}px`,
             },
           }}
         >
-          {children}
+          <Toolbar />
+          <Box
+            sx={{
+              padding: {
+                xs: 2,
+                md: 4,
+              },
+              paddingTop: {
+                xs: 4,
+                md: 6,
+              },
+            }}
+          >
+            {children}
+          </Box>
         </Box>
+        <AppSidebar
+          handleAppSidebarToggle={handleAppSidebarToggle}
+          appSidebarOpen={appSidebarOpen}
+          appSidebarWidth={appSidebarWidth}
+        />
       </Box>
-      <AppSidebar
-        handleAppSidebarToggle={handleAppSidebarToggle}
-        appSidebarOpen={appSidebarOpen}
-        appSidebarWidth={appSidebarWidth}
-      />
-    </Box>
+    </SignedIn>
   );
 }
 
