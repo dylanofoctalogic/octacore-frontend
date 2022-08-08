@@ -1,10 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { DashboardLayout } from '@octalogic-admin/layouts';
+import { DashboardLayout, EmptyLayout } from '@octalogic-admin/layouts';
 
 import Landing from './pages/landing/landing';
 import Tickets from './pages/tickets/tickets';
 import { supportRoutes } from '@octalogic-admin/constants';
+import { PageNotFound } from '@octalogic-admin/components';
 
 export function Router() {
   return (
@@ -23,6 +24,14 @@ export function Router() {
           <DashboardLayout>
             <Tickets />
           </DashboardLayout>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <EmptyLayout>
+            <PageNotFound />
+          </EmptyLayout>
         }
       />
     </Routes>
