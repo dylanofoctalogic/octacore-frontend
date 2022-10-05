@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useSnackbar } from 'notistack';
-
 import {
   AppBar,
   Box,
@@ -9,12 +8,15 @@ import {
   Typography,
   Menu,
   MenuItem,
+  Grid,
+  Stack,
 } from '@mui/material';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import AppsIcon from '@mui/icons-material/Apps';
 import { appRoutes, dashboardRoutes } from '@octalogic-admin/constants';
+import { Link } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface HeaderProps {
@@ -62,7 +64,9 @@ export function Header(props: HeaderProps) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem>
+        <Link to={dashboardRoutes.authentication.profile}>Profile</Link>
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
@@ -104,28 +108,24 @@ export function Header(props: HeaderProps) {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="app selection"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={() => handleAppSidebarToggle()}
-              color="inherit"
-            >
-              <AppsIcon />
-            </IconButton>
+            <Grid container alignContent="center">
+              <Grid item>
+                <Stack direction="column" justifyContent="center" className="h-full">
+                  <AccountCircle />
+                </Stack>
+              </Grid>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="app selection"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={() => handleAppSidebarToggle()}
+                color="inherit"
+              >
+                <AppsIcon />
+              </IconButton>
+            </Grid>
           </Box>
         </Toolbar>
       </AppBar>

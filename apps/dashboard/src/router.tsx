@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-
 import { DashboardLayout, EmptyLayout } from '@octalogic-admin/layouts';
 
 import Landing from './pages/landing/landing';
@@ -22,6 +21,21 @@ export function Router() {
           </EmptyLayout>
         }
       />
+
+      {/* <Route
+        path={dashboardRoutes.authentication.login}
+        element={
+          <SignedOut>
+            <EmptyLayout>
+              <SignIn
+                routing="path"
+                path={dashboardRoutes.authentication.login}
+                redirectUrl={dashboardRoutes.home}
+              />
+            </EmptyLayout>
+          </SignedOut>
+        }
+      /> */}
       <Route
         path={dashboardRoutes.home}
         element={
@@ -62,6 +76,20 @@ export function Router() {
           </DashboardLayout>
         }
       />
+
+      {/* <Route
+        path={dashboardRoutes.authentication.profile}
+        element={
+          <SignedIn>
+            <EmptyLayout>
+              <UserProfile
+                routing="path"
+                path={dashboardRoutes.authentication.profile}
+              />
+            </EmptyLayout>
+          </SignedIn>
+        }
+      /> */}
       <Route
         path="*"
         element={
@@ -74,4 +102,4 @@ export function Router() {
   );
 }
 
-export default Routes;
+export default Router;
