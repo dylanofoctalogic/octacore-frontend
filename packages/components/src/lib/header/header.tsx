@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useSnackbar } from 'notistack';
-import { UserButton } from '@clerk/clerk-react';
 import {
   AppBar,
   Box,
@@ -112,7 +111,7 @@ export function Header(props: HeaderProps) {
             <Grid container alignContent="center">
               <Grid item>
                 <Stack direction="column" justifyContent="center" className="h-full">
-                  <UserButton />
+                  <AccountCircle />
                 </Stack>
               </Grid>
               <IconButton

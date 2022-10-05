@@ -27,6 +27,7 @@ export function SidebarItem(props: SidebarItemProps) {
       <ListItemButton
         selected={match !== null}
         onClick={() => {
+          console.log("path",path);
           navigateTo(path);
         }}
       >
