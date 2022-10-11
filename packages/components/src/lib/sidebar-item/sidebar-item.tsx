@@ -23,12 +23,21 @@ export function SidebarItem(props: SidebarItemProps) {
   const isMatched = match !== null;
 
   return (
-    <ListItem disablePadding sx={{ backgroundColor: 'grey.300' }}>
+    <ListItem
+      disablePadding
+      sx={{
+        backgroundColor: isMatched ? 'grey.300' : undefined,
+        borderRadius: '0.5rem',
+      }}
+    >
       <ListItemButton
         selected={match !== null}
         onClick={() => {
           console.log('path', path);
           navigateTo(path);
+        }}
+        sx={{
+          borderRadius: '0.5rem',
         }}
       >
         <ListItemIcon sx={{ color: isMatched ? 'secondary.dark' : undefined }}>
@@ -36,7 +45,14 @@ export function SidebarItem(props: SidebarItemProps) {
         </ListItemIcon>
         <ListItemText
           primary={label}
-          sx={{ color: isMatched ? 'secondary.dark' : undefined }}
+          sx={{
+            color: isMatched ? 'secondary.dark' : undefined,
+          }}
+          primaryTypographyProps={{
+            sx: {
+              fontWeight: isMatched ? 'semi-bold' : undefined,
+            },
+          }}
         />
       </ListItemButton>
     </ListItem>

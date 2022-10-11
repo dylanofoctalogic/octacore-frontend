@@ -21,9 +21,9 @@ const theme = createTheme({
       main: '#FFFFFF',
     },
     secondary: {
-      main: cyan[200],
+      main: cyan[300],
       light: cyan[100],
-      dark: cyan[500],
+      dark: cyan[700],
     },
     background: {
       default: '#FFFFFF',

@@ -1,5 +1,6 @@
 import { include } from 'named-urls';
 
+import HiveIcon from '@mui/icons-material/Hive';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupIcon from '@mui/icons-material/Group';
 import ImportantDevicesIcon from '@mui/icons-material/ImportantDevices';
@@ -99,17 +100,17 @@ const appRoutes = {
 const appSidebarConfig = [
   {
     path: appRoutes.core,
-    icon: <DashboardIcon />,
-    label: 'Dashboard',
+    icon: 'hive',
+    label: 'Core',
   },
   {
     path: appRoutes.portfolio,
-    icon: <ImportantDevicesIcon />,
+    icon: 'important_devices',
     label: 'Portfolio',
   },
   {
     path: appRoutes.support,
-    icon: <GroupIcon />,
+    icon: 'group',
     label: 'Support',
   },
 ];

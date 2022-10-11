@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box, Drawer, Grid, List } from '@mui/material';
@@ -49,6 +48,10 @@ export function Sidebar(props: SidebarProps) {
     navigate(path);
   };
 
+  const redirectTo = (path: string) => {
+    window.location.href = path;
+  };
+
   return (
     <Box>
       <Drawer
@@ -67,23 +70,35 @@ export function Sidebar(props: SidebarProps) {
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: sidebarWidth,
+            top: isLarge ? '1rem' : undefined,
           },
         }}
       >
-        <Grid container sx={{ height: '100%', backgroundColor: 'grey.100' }}>
-          <Grid item xs={3}>
+        <Grid
+          container
+          sx={{
+            height: '100%',
+            backgroundColor: 'grey.100',
+            padding: '0.5rem',
+          }}
+        >
+          <Grid item xs={4}>
             {appSidebarConfig.map((item, index) => (
               <AppSidebarItem
                 key={index}
                 icon={item.icon}
                 label={item.label}
                 path={item.path || '#'}
-                navigateTo={navigateTo}
+                navigateTo={redirectTo}
               />
             ))}
           </Grid>
-          <Grid item xs={9} sx={{ backgroundColor: 'grey.200', padding:'0.5rem' }}>
-            <List>
+          <Grid
+            item
+            xs={8}
+            sx={{ backgroundColor: 'grey.200', padding: '0.5rem' }}
+          >
+            <List sx={{ paddingTop: '0px' }}>
               {sidebarConfig.map((item, index) => (
                 <SidebarItem
                   key={index}

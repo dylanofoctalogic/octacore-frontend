@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useSnackbar } from 'notistack';
 import SVG from 'react-inlinesvg';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import {
   AppBar,
   Box,
@@ -26,6 +28,8 @@ export interface HeaderProps {
 
 export function Header(props: HeaderProps) {
   const { enqueueSnackbar } = useSnackbar();
+  const theme = useTheme();
+  const isLarge = useMediaQuery(theme.breakpoints.up('md'));
   const [anchorEl, setAnchorEl] = React.useState<null | Element>(null);
 
   const { handleDrawerToggle, handleAppSidebarToggle } = props;
@@ -77,7 +81,12 @@ export function Header(props: HeaderProps) {
       <AppBar
         position="fixed"
         elevation={1}
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          display: {
+            xs: isLarge ? 'none' : 'block',
+          },
+        }}
       >
         <Toolbar>
           <IconButton
