@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
+import { grey } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Box, Drawer, List, ListSubheader } from '@mui/material';
+import { Box, Drawer, Grid, List } from '@mui/material';
 import {
   dashboardSidebarConfig,
   appSidebarConfig,
@@ -10,6 +11,7 @@ import {
   supportSidebarConfig,
 } from '@octalogic-admin/constants';
 import SidebarItem from '../sidebar-item/sidebar-item';
+import AppSidebarItem from '../app-sidebar-item/app-sidebar-item';
 
 /* eslint-disable-next-line */
 export interface SidebarProps {
@@ -56,6 +58,7 @@ export function Sidebar(props: SidebarProps) {
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
+        elevation={2}
         sx={{
           display: {
             xs: isLarge ? 'none' : 'block',
@@ -67,19 +70,32 @@ export function Sidebar(props: SidebarProps) {
           },
         }}
       >
-        <List
-          subheader={<ListSubheader>{foundApp?.label || ''}</ListSubheader>}
-        >
-          {sidebarConfig.map((item, index) => (
-            <SidebarItem
-              key={index}
-              icon={item.icon}
-              label={item.label}
-              path={item.path}
-              navigateTo={navigateTo}
-            />
-          ))}
-        </List>
+        <Grid container sx={{ height: '100%', backgroundColor: 'grey.100' }}>
+          <Grid item xs={3}>
+            {appSidebarConfig.map((item, index) => (
+              <AppSidebarItem
+                key={index}
+                icon={item.icon}
+                label={item.label}
+                path={item.path || '#'}
+                navigateTo={navigateTo}
+              />
+            ))}
+          </Grid>
+          <Grid item xs={9} sx={{ backgroundColor: 'grey.200', padding:'0.5rem' }}>
+            <List>
+              {sidebarConfig.map((item, index) => (
+                <SidebarItem
+                  key={index}
+                  icon={item.icon}
+                  label={item.label}
+                  path={item.path}
+                  navigateTo={navigateTo}
+                />
+              ))}
+            </List>
+          </Grid>
+        </Grid>
       </Drawer>
     </Box>
   );

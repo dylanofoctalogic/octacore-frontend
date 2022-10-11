@@ -18,12 +18,15 @@ declare module '@mui/material/styles' {
 const theme = createTheme({
   palette: {
     primary: {
+      main: '#FFFFFF',
+    },
+    secondary: {
       main: cyan[200],
       light: cyan[100],
       dark: cyan[500],
     },
     background: {
-      default: grey[200],
+      default: '#FFFFFF',
     },
   },
   components: {

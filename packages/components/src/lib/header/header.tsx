@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useSnackbar } from 'notistack';
+import SVG from 'react-inlinesvg';
 import {
   AppBar,
   Box,
   Toolbar,
   IconButton,
-  Typography,
   Menu,
   MenuItem,
   Grid,
@@ -76,6 +76,7 @@ export function Header(props: HeaderProps) {
     <Box>
       <AppBar
         position="fixed"
+        elevation={1}
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
@@ -97,20 +98,24 @@ export function Header(props: HeaderProps) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            Octalogic Tech
-          </Typography>
+          <div>
+            <SVG
+              src="https://firebasestorage.googleapis.com/v0/b/octacore-37ee5.appspot.com/o/octalogic.svg?alt=media&token=930e123e-a26d-49d5-9f3c-764e630062de"
+              width="auto"
+              height="3rem"
+              title="React"
+            />
+          </div>
 
           <Box sx={{ flexGrow: 1 }} />
           <Box>
             <Grid container alignContent="center">
               <Grid item>
-                <Stack direction="column" justifyContent="center" className="h-full">
+                <Stack
+                  direction="column"
+                  justifyContent="center"
+                  className="h-full"
+                >
                   <AccountCircle />
                 </Stack>
               </Grid>

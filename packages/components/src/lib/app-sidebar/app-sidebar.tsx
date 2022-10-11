@@ -22,6 +22,8 @@ export function AppSidebar(props: AppSidebarProps) {
       open={appSidebarOpen}
       onClose={handleAppSidebarToggle}
       anchor="right"
+      elevation={1}
+      hideBackdrop
       ModalProps={{
         keepMounted: true, // Better open performance on mobile.
       }}

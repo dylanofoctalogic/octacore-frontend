@@ -23,18 +23,21 @@ export function SidebarItem(props: SidebarItemProps) {
   const isMatched = match !== null;
 
   return (
-    <ListItem disablePadding>
+    <ListItem disablePadding sx={{ backgroundColor: 'grey.300' }}>
       <ListItemButton
         selected={match !== null}
         onClick={() => {
-          console.log("path",path);
+          console.log('path', path);
           navigateTo(path);
         }}
       >
-        <ListItemIcon sx={{ color: isMatched ? 'primary.dark' : undefined }}>
+        <ListItemIcon sx={{ color: isMatched ? 'secondary.dark' : undefined }}>
           {icon}
         </ListItemIcon>
-        <ListItemText primary={label} sx={{ color: isMatched ? 'primary.dark' : undefined }} />
+        <ListItemText
+          primary={label}
+          sx={{ color: isMatched ? 'secondary.dark' : undefined }}
+        />
       </ListItemButton>
     </ListItem>
   );

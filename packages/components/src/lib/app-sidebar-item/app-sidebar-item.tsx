@@ -17,23 +17,24 @@ export function AppSidebarItem(props: AppSidebarItemProps) {
   const isMatched = path === origin;
 
   return (
-    <Grid container justifyContent="center" sx={{ paddingY: '0.5rem' }}>
+    <Grid
+      container
+      justifyContent="center"
+      sx={{
+        padding: '0.5rem',
+        backgroundColor: isMatched ? 'grey.200' : undefined,
+      }}
+    >
       <IconButton
         aria-label="delete"
         onClick={() => {
           navigateTo(path);
         }}
         size="large"
-        sx={{ color: isMatched ? 'primary.dark' : undefined }}
       >
         {icon}
       </IconButton>
-      <Typography
-        variant="caption"
-        sx={{ color: isMatched ? 'primary.dark' : undefined }}
-      >
-        {label}
-      </Typography>
+      <Typography variant="caption">{label}</Typography>
     </Grid>
   );
 }
