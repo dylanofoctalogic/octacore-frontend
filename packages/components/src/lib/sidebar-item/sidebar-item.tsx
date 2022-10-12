@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { useMatch, useResolvedPath } from 'react-router-dom';
+import { teal, grey } from '@mui/material/colors';
 import {
   ListItem,
   ListItemButton,
@@ -26,8 +27,9 @@ export function SidebarItem(props: SidebarItemProps) {
     <ListItem
       disablePadding
       sx={{
-        backgroundColor: isMatched ? 'grey.300' : undefined,
+        backgroundColor: isMatched ? teal[50] : undefined,
         borderRadius: '0.5rem',
+        marginY: '0.25rem',
       }}
     >
       <ListItemButton

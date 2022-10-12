@@ -28,7 +28,7 @@ export function AppSidebarItem(props: AppSidebarItemProps) {
         alignContent="center"
         sx={{
           padding: '0.5rem',
-          backgroundColor: isMatched ? 'grey.200' : undefined,
+          backgroundColor: isMatched ? 'grey.100' : undefined,
           borderTopLeftRadius: '0.5rem',
           borderBottomLeftRadius: '0.5rem',
         }}

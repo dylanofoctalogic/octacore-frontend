@@ -1,11 +1,11 @@
 import * as React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { Box, Toolbar } from '@mui/material';
-import { AppSidebar, Header, Sidebar } from '@octalogic-admin/components';
+import { Box, Toolbar, Fab } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Header, Sidebar } from '@octalogic-admin/components';
 
 const sidebarWidth = 310;
-const appSidebarWidth = 75;
 
 /* eslint-disable-next-line */
 export interface DashboardLayoutProps {
@@ -14,8 +14,8 @@ export interface DashboardLayoutProps {
 
 export function DashboardLayout(props: DashboardLayoutProps) {
   const { children } = props;
-   const theme = useTheme();
-   const isLarge = useMediaQuery(theme.breakpoints.up('md'));
+  const theme = useTheme();
+  const isLarge = useMediaQuery(theme.breakpoints.up('md'));
   const [mobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
   const [appSidebarOpen, setAppSidebarOpen] = React.useState(false);
 
@@ -44,11 +44,6 @@ export function DashboardLayout(props: DashboardLayoutProps) {
           sidebarWidth={sidebarWidth}
         />
       </Box>
-      <Header
-        handleDrawerToggle={handleDrawerToggle}
-        handleAppSidebarToggle={handleAppSidebarToggle}
-      />
-
       <Box
         component="main"
         sx={{
@@ -56,15 +51,9 @@ export function DashboardLayout(props: DashboardLayoutProps) {
             xs: 0,
             md: `${sidebarWidth}px`,
           },
+          paddingBottom: 7,
         }}
       >
-        <Toolbar
-          sx={{
-            display: {
-              xs: isLarge ? 'none' : 'block',
-            },
-          }}
-        />
         <Box
           sx={{
             padding: {
@@ -72,19 +61,31 @@ export function DashboardLayout(props: DashboardLayoutProps) {
               md: 4,
             },
             paddingTop: {
-              xs: 4,
+              xs: 3,
               md: 6,
             },
           }}
         >
           {children}
         </Box>
+        <Fab
+          variant="extended"
+          sx={{
+            position: 'fixed',
+            bottom: 16,
+            right: 16,
+            display: {
+              xs: 'block',
+              md: 'none',
+            },
+            backgroundColor: 'secondary.light',
+          }}
+          onClick={() => handleDrawerToggle()}
+        >
+          <MenuIcon sx={{ mr: 1 }} />
+          Menu
+        </Fab>
       </Box>
-      {/* <AppSidebar
-        handleAppSidebarToggle={handleAppSidebarToggle}
-        appSidebarOpen={appSidebarOpen}
-        appSidebarWidth={appSidebarWidth}
-      /> */}
     </Box>
   );
 }

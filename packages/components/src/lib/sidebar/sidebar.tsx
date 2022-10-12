@@ -4,10 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box, Drawer, Grid, List } from '@mui/material';
 import {
-  dashboardSidebarConfig,
   appSidebarConfig,
-  portfolioSidebarConfig,
-  supportSidebarConfig,
+  getCurrentAppConfig,
 } from '@octalogic-admin/constants';
 import SidebarItem from '../sidebar-item/sidebar-item';
 import AppSidebarItem from '../app-sidebar-item/app-sidebar-item';
@@ -26,23 +24,8 @@ export function Sidebar(props: SidebarProps) {
   const isLarge = useMediaQuery(theme.breakpoints.up('md'));
 
   const origin = window.location.origin;
-
   const foundApp = appSidebarConfig.find((app) => app.path === origin);
-
-  let sidebarConfig = dashboardSidebarConfig;
-  switch (foundApp?.label) {
-    case 'Dashboard':
-      sidebarConfig = dashboardSidebarConfig;
-      break;
-    case 'Portfolio':
-      sidebarConfig = portfolioSidebarConfig;
-      break;
-    case 'Support':
-      sidebarConfig = supportSidebarConfig;
-      break;
-    default:
-      break;
-  }
+  const sidebarConfig = getCurrentAppConfig(foundApp?.label || '');
 
   const navigateTo = (path: string) => {
     navigate(path);
@@ -70,7 +53,7 @@ export function Sidebar(props: SidebarProps) {
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: sidebarWidth,
-            top: isLarge ? '1rem' : undefined,
+            top: '1.5rem',
           },
         }}
       >
@@ -78,7 +61,6 @@ export function Sidebar(props: SidebarProps) {
           container
           sx={{
             height: '100%',
-            backgroundColor: 'grey.100',
             padding: '0.5rem',
           }}
         >
@@ -96,7 +78,7 @@ export function Sidebar(props: SidebarProps) {
           <Grid
             item
             xs={8}
-            sx={{ backgroundColor: 'grey.200', padding: '0.5rem' }}
+            sx={{ backgroundColor: 'grey.100', padding: '0.25rem' }}
           >
             <List sx={{ paddingTop: '0px' }}>
               {sidebarConfig.map((item, index) => (

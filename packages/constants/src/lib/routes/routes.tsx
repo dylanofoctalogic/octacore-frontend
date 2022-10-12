@@ -1,6 +1,5 @@
 import { include } from 'named-urls';
 
-import HiveIcon from '@mui/icons-material/Hive';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupIcon from '@mui/icons-material/Group';
 import ImportantDevicesIcon from '@mui/icons-material/ImportantDevices';
@@ -57,7 +56,7 @@ const dashboardSidebarConfig = [
 
 const portfolioRoutes = {
   home: '/',
-  portfolios: 'portfolios',
+  portfolios: '/portfolios',
 };
 
 const portfolioSidebarConfig = [
@@ -75,7 +74,7 @@ const portfolioSidebarConfig = [
 
 const supportRoutes = {
   home: '/',
-  tickets: 'tickets',
+  tickets: '/tickets',
 };
 
 const supportSidebarConfig = [
@@ -115,6 +114,25 @@ const appSidebarConfig = [
   },
 ];
 
+const getCurrentAppConfig = (label: string) => {
+  let sidebarConfig = dashboardSidebarConfig;
+  switch (label) {
+    case 'Dashboard':
+      sidebarConfig = dashboardSidebarConfig;
+      break;
+    case 'Portfolio':
+      sidebarConfig = portfolioSidebarConfig;
+      break;
+    case 'Support':
+      sidebarConfig = supportSidebarConfig;
+      break;
+    default:
+      break;
+  }
+
+  return sidebarConfig;
+};
+
 export {
   appRoutes,
   appSidebarConfig,
@@ -124,4 +142,5 @@ export {
   portfolioSidebarConfig,
   supportRoutes,
   supportSidebarConfig,
+  getCurrentAppConfig,
 };

@@ -1,17 +1,24 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { Box, Typography } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import MaterialTable from '@material-table/core';
 import { useFetchCategories } from '@octalogic-admin/hooks';
+import { PageHeader } from '@octalogic-admin/components';
 
 export function Categories() {
   const queryClient = useQueryClient();
   const { status, data, error, isFetching } = useFetchCategories();
-  console.log('🚀 ~ file: categories.tsx ~ line 8 ~ Categories ~ data', data);
 
   return (
     <Box>
+      <Grid>
+        <PageHeader title="Categories" />
+      </Grid>
       <MaterialTable
-        title="Simple Action Preview"
+        title="Manage Categories"
+        options={{
+          pageSize: 10,
+          pageSizeOptions: [10, 15, 25],
+        }}
         columns={[
           { title: 'Name', field: 'name' },
           { title: 'Surname', field: 'surname' },
@@ -35,7 +42,8 @@ export function Categories() {
           {
             icon: 'save',
             tooltip: 'Save User',
-            onClick: (event, rowData:any) => alert('You saved ' + rowData.name),
+            onClick: (event: any, rowData: any) =>
+              alert('You saved ' + rowData.name),
           },
         ]}
       />

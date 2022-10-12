@@ -26,7 +26,7 @@ const theme = createTheme({
       dark: cyan[700],
     },
     background: {
-      default: '#FFFFFF',
+      default: grey[100],
     },
   },
   components: {
