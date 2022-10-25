@@ -56,7 +56,7 @@ const dashboardSidebarConfig = [
 
 const portfolioRoutes = {
   home: '/',
-  portfolios: 'portfolios',
+  portfolios: '/portfolios',
 };
 
 const portfolioSidebarConfig = [
@@ -74,7 +74,7 @@ const portfolioSidebarConfig = [
 
 const supportRoutes = {
   home: '/',
-  tickets: 'tickets',
+  tickets: '/tickets',
 };
 
 const supportSidebarConfig = [
@@ -99,20 +99,39 @@ const appRoutes = {
 const appSidebarConfig = [
   {
     path: appRoutes.core,
-    icon: <DashboardIcon />,
-    label: 'Dashboard',
+    icon: 'hive',
+    label: 'Core',
   },
   {
     path: appRoutes.portfolio,
-    icon: <ImportantDevicesIcon />,
+    icon: 'important_devices',
     label: 'Portfolio',
   },
   {
     path: appRoutes.support,
-    icon: <GroupIcon />,
+    icon: 'group',
     label: 'Support',
   },
 ];
+
+const getCurrentAppConfig = (label: string) => {
+  let sidebarConfig = dashboardSidebarConfig;
+  switch (label) {
+    case 'Dashboard':
+      sidebarConfig = dashboardSidebarConfig;
+      break;
+    case 'Portfolio':
+      sidebarConfig = portfolioSidebarConfig;
+      break;
+    case 'Support':
+      sidebarConfig = supportSidebarConfig;
+      break;
+    default:
+      break;
+  }
+
+  return sidebarConfig;
+};
 
 export {
   appRoutes,
@@ -123,4 +142,5 @@ export {
   portfolioSidebarConfig,
   supportRoutes,
   supportSidebarConfig,
+  getCurrentAppConfig,
 };

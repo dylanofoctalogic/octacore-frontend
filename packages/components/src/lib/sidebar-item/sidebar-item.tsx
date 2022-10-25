@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { useMatch, useResolvedPath } from 'react-router-dom';
+import { teal, grey } from '@mui/material/colors';
 import {
   ListItem,
   ListItemButton,
@@ -23,18 +24,38 @@ export function SidebarItem(props: SidebarItemProps) {
   const isMatched = match !== null;
 
   return (
-    <ListItem disablePadding>
+    <ListItem
+      disablePadding
+      sx={{
+        backgroundColor: isMatched ? teal[50] : undefined,
+        borderRadius: '0.5rem',
+        marginY: '0.25rem',
+      }}
+    >
       <ListItemButton
         selected={match !== null}
         onClick={() => {
-          console.log("path",path);
+          console.log('path', path);
           navigateTo(path);
         }}
+        sx={{
+          borderRadius: '0.5rem',
+        }}
       >
-        <ListItemIcon sx={{ color: isMatched ? 'primary.dark' : undefined }}>
+        <ListItemIcon sx={{ color: isMatched ? 'secondary.dark' : undefined }}>
           {icon}
         </ListItemIcon>
-        <ListItemText primary={label} sx={{ color: isMatched ? 'primary.dark' : undefined }} />
+        <ListItemText
+          primary={label}
+          sx={{
+            color: isMatched ? 'secondary.dark' : undefined,
+          }}
+          primaryTypographyProps={{
+            sx: {
+              fontWeight: isMatched ? 'semi-bold' : undefined,
+            },
+          }}
+        />
       </ListItemButton>
     </ListItem>
   );

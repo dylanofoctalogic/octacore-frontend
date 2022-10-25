@@ -1,9 +1,8 @@
-import { ReactNode } from 'react';
-import { IconButton, Grid, Typography } from '@mui/material';
+import { Grid, Typography, ButtonBase, Icon } from '@mui/material';
 
 /* eslint-disable-next-line */
 export interface AppSidebarItemProps {
-  icon: ReactNode;
+  icon: string;
   label: string;
   path: string;
   navigateTo: (path: string) => void;
@@ -17,24 +16,36 @@ export function AppSidebarItem(props: AppSidebarItemProps) {
   const isMatched = path === origin;
 
   return (
-    <Grid container justifyContent="center" sx={{ paddingY: '0.5rem' }}>
-      <IconButton
-        aria-label="delete"
-        onClick={() => {
-          navigateTo(path);
+    <ButtonBase
+      onClick={() => {
+        navigateTo(path);
+      }}
+      sx={{ width: '100%' }}
+    >
+      <Grid
+        container
+        direction="column"
+        alignContent="center"
+        sx={{
+          padding: '0.5rem',
+          backgroundColor: isMatched ? 'grey.100' : undefined,
+          borderTopLeftRadius: '0.5rem',
+          borderBottomLeftRadius: '0.5rem',
         }}
-        size="large"
-        sx={{ color: isMatched ? 'primary.dark' : undefined }}
       >
-        {icon}
-      </IconButton>
-      <Typography
-        variant="caption"
-        sx={{ color: isMatched ? 'primary.dark' : undefined }}
-      >
-        {label}
-      </Typography>
-    </Grid>
+        <Grid item xs={12} container justifyContent="center">
+          <Icon sx={{ color: isMatched ? 'secondary.dark' : undefined }}>
+            {icon}
+          </Icon>
+        </Grid>
+        <Typography
+          variant="caption"
+          sx={{ color: isMatched ? 'secondary.dark' : undefined }}
+        >
+          {label}
+        </Typography>
+      </Grid>
+    </ButtonBase>
   );
 }
 
