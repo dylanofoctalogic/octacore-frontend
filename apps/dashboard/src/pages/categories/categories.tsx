@@ -31,6 +31,7 @@ export function Categories() {
         ]}
         data={[
           { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+          { name: 'Bill', surname: 'Ryan', birthYear: 1987, birthCity: 63 },
           {
             name: 'Zerya Betül',
             surname: 'Baran',
