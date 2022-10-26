@@ -1,28 +1,32 @@
-import { useLocation, useNavigate, NavLink } from 'react-router-dom';
-import { Box, Breadcrumbs, Link, Typography } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import {
+  Box,
+  Breadcrumbs,
+  Button,
+  Link,
+  Typography,
+  Grid,
+} from '@mui/material';
 
 import {
   appSidebarConfig,
   getCurrentAppConfig,
 } from '@octalogic-admin/constants';
 
-/* eslint-disable-next-line */
 export interface PageHeaderProps {
   title: string;
+  actionButton?: {
+    label: string;
+    onClick: () => void;
+  };
 }
 
 export function PageHeader(props: PageHeaderProps) {
-  const { title } = props;
+  const { title, actionButton } = props;
   const { pathname } = useLocation();
-  console.log("🚀 ~ file: page-header.tsx ~ line 17 ~ PageHeader ~ pathname", pathname)
   const origin = window.location.origin;
   const foundApp = appSidebarConfig.find((app) => app.path === origin);
   const sidebarConfig = getCurrentAppConfig(foundApp?.label || '');
-  console.log(
-    '🚀 ~ file: page-header.tsx ~ line 20 ~ PageHeader ~ sidebarConfig',
-    sidebarConfig
-  );
-
   const foundRoute = sidebarConfig.find((route) => route.path === pathname);
 
   const redirectTo = (path: string) => {
@@ -45,11 +49,32 @@ export function PageHeader(props: PageHeaderProps) {
         >
           {foundApp?.label || '-'}
         </Link>
-        <Typography color="secondary.dark">{foundRoute?.label || "-"}</Typography>
+        <Typography color="secondary.dark">
+          {foundRoute?.label || '-'}
+        </Typography>
       </Breadcrumbs>
-      <Typography variant="h4" sx={{ fontWeight: 500 }}>
-        {title}
-      </Typography>
+      <Grid container>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h4" sx={{ fontWeight: 500 }}>
+            {title}
+          </Typography>
+        </Grid>
+        {actionButton ? (
+          <Grid item xs={12} md={6} container justifyContent="flex-end">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                actionButton.onClick();
+              }}
+            >
+              Add {actionButton.label}
+            </Button>
+          </Grid>
+        ) : (
+          ''
+        )}
+      </Grid>
     </Box>
   );
 }

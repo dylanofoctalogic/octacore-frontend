@@ -53,7 +53,7 @@
       "options": {
         "buildTarget": "portfolio:build",
         "hmr": true,
-        "port": 3002
+        "port": 3003
       },
       "configurations": {
         "development": {

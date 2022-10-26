@@ -133,6 +133,10 @@ const getCurrentAppConfig = (label: string) => {
   return sidebarConfig;
 };
 
+const serviceRoutes = {
+  core: process.env['NX_CORE_SERVICE_URL'],
+};
+
 export {
   appRoutes,
   appSidebarConfig,
@@ -143,4 +147,5 @@ export {
   supportRoutes,
   supportSidebarConfig,
   getCurrentAppConfig,
+  serviceRoutes,
 };

@@ -50,7 +50,7 @@
       "options": {
         "buildTarget": "support:build",
         "hmr": true,
-        "port": 3001,
+        "port": 3002,
         "proxyConfig": "apps/support/proxy.conf.json"
       },
       "configurations": {

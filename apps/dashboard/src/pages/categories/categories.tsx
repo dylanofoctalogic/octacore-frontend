@@ -1,52 +1,64 @@
+import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Box, Grid } from '@mui/material';
-import MaterialTable from '@material-table/core';
+import { Edit as EditIcon } from '@mui/icons-material';
 import { useFetchCategories } from '@octalogic-admin/hooks';
 import { PageHeader } from '@octalogic-admin/components';
+import { OctaMaterialTable } from '@octalogic-admin/constants';
 
 export function Categories() {
   const queryClient = useQueryClient();
   const { status, data, error, isFetching } = useFetchCategories();
 
+  const [selectedRow, setSelectedRow] = useState<Record<string, unknown>>({});
+
+  const handleAddClick = () => {
+    // setSelectedAccount(data);
+    // setEditModalOpen(true);
+  };
+
+  const handleEditClick = (data: object) => {
+    console.log(
+      '🚀 ~ file: categories.tsx ~ line 13 ~ handleEditClick ~ data',
+      data
+    );
+    // setSelectedAccount(data);
+    // setEditModalOpen(true);
+  };
+
+  const overflowActions = [
+    {
+      callback: handleEditClick,
+      icon: <EditIcon fontSize="small" />,
+      label: 'Edit Category',
+    },
+  ];
+
   return (
     <Box>
+      ·
       <Grid>
-        <PageHeader title="Categories" />
+        <PageHeader
+          title="Categories"
+          actionButton={{ label: 'Category', onClick: handleAddClick }}
+        />
       </Grid>
-      <MaterialTable
+      <OctaMaterialTable
         title="Manage Categories"
-        options={{
-          pageSize: 10,
-          pageSizeOptions: [10, 15, 25],
-        }}
+        isLoading={isFetching}
         columns={[
           { title: 'Name', field: 'name' },
-          { title: 'Surname', field: 'surname' },
-          { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-          {
-            title: 'Birth Place',
-            field: 'birthCity',
-            lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
-          },
+          { title: 'Description', field: 'description' },
         ]}
         data={[
-          { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-          { name: 'Bill', surname: 'Ryan', birthYear: 1987, birthCity: 63 },
           {
-            name: 'Zerya Betül',
-            surname: 'Baran',
-            birthYear: 2017,
-            birthCity: 34,
+            name: 'Donna',
+            description: 'Hello there',
           },
         ]}
-        actions={[
-          {
-            icon: 'save',
-            tooltip: 'Save User',
-            onClick: (event: any, rowData: any) =>
-              alert('You saved ' + rowData.name),
-          },
-        ]}
+        overflowActions={overflowActions}
+        setSelectedRow={setSelectedRow}
+        selectedRow={selectedRow}
       />
     </Box>
   );
