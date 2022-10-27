@@ -1,11 +1,11 @@
 import * as React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { Box, Toolbar, Fab } from '@mui/material';
+import { Box, Fab } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Header, Sidebar } from '@octalogic-admin/components';
+import { Sidebar } from '@octalogic-admin/components';
 
-const sidebarWidth = 310;
+const sidebarWidth = 350;
 
 /* eslint-disable-next-line */
 export interface DashboardLayoutProps {
@@ -78,7 +78,7 @@ export function DashboardLayout(props: DashboardLayoutProps) {
               xs: 'block',
               md: 'none',
             },
-            backgroundColor: 'secondary.light',
+            backgroundColor: 'primary.light',
           }}
           onClick={() => handleDrawerToggle()}
         >

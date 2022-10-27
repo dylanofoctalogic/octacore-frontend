@@ -18,7 +18,9 @@ declare module '@mui/material/styles' {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FFFFFF',
+      main: cyan[300],
+      light: cyan[100],
+      dark: cyan[700],
     },
     secondary: {
       main: cyan[300],
@@ -69,6 +71,14 @@ const theme = createTheme({
         root: {
           backgroundColor: grey[100],
           opacity: '0.5!important',
+        },
+      },
+    },
+    MuiDialogActions: {
+      styleOverrides: {
+        root: {
+          marginLeft: '1rem',
+          marginRight: '1rem',
         },
       },
     },

@@ -49,9 +49,7 @@ export function PageHeader(props: PageHeaderProps) {
         >
           {foundApp?.label || '-'}
         </Link>
-        <Typography color="secondary.dark">
-          {foundRoute?.label || '-'}
-        </Typography>
+        <Typography color="primary.dark">{foundRoute?.label || '-'}</Typography>
       </Breadcrumbs>
       <Grid container>
         <Grid item xs={12} md={6}>
@@ -63,7 +61,7 @@ export function PageHeader(props: PageHeaderProps) {
           <Grid item xs={12} md={6} container justifyContent="flex-end">
             <Button
               variant="contained"
-              color="secondary"
+              color="primary"
               onClick={() => {
                 actionButton.onClick();
               }}

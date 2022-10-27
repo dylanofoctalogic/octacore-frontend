@@ -11,7 +11,13 @@ export interface OctalogicAppProviderProps {
 
 export function OctalogicAppProvider(props: OctalogicAppProviderProps) {
   const { children } = props;
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>

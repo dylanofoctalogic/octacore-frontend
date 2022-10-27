@@ -1,29 +1,34 @@
 import { useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import { Box, Grid } from '@mui/material';
-import { Edit as EditIcon } from '@mui/icons-material';
-import { useFetchCategories } from '@octalogic-admin/hooks';
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { useReadCategories } from '@octalogic-admin/hooks';
 import { PageHeader } from '@octalogic-admin/components';
 import { OctaMaterialTable } from '@octalogic-admin/constants';
+import CreateCategoryModal from '../../components/category/create-category-modal/create-category-modal';
+import UpdateCategoryModal from '../../components/category/update-category-modal/update-category-modal';
+import { Category } from '@octalogic-admin/interfaces';
+import DeleteCategoryModal from '../../components/category/delete-category-modal/delete-category-modal';
 
 export function Categories() {
-  const queryClient = useQueryClient();
-  const { status, data, error, isFetching } = useFetchCategories();
-
-  const [selectedRow, setSelectedRow] = useState<Record<string, unknown>>({});
+  const { data, isFetching } = useReadCategories();
+  
+  const [selectedRow, setSelectedRow] = useState<Category | null>(null);
+  const [createModalOpen, setCreateModalOpen] = useState<boolean>(false);
+  const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
 
   const handleAddClick = () => {
-    // setSelectedAccount(data);
-    // setEditModalOpen(true);
+    setCreateModalOpen(true);
   };
 
-  const handleEditClick = (data: object) => {
-    console.log(
-      '🚀 ~ file: categories.tsx ~ line 13 ~ handleEditClick ~ data',
-      data
-    );
-    // setSelectedAccount(data);
-    // setEditModalOpen(true);
+  const handleEditClick = (data: Category) => {
+    setSelectedRow(data);
+    setUpdateModalOpen(true);
+  };
+
+  const handleDeleteClick = (data: Category) => {
+    setSelectedRow(data);
+    setDeleteModalOpen(true);
   };
 
   const overflowActions = [
@@ -32,11 +37,15 @@ export function Categories() {
       icon: <EditIcon fontSize="small" />,
       label: 'Edit Category',
     },
+    {
+      callback: handleDeleteClick,
+      icon: <DeleteIcon fontSize="small" />,
+      label: 'Delete Category',
+    },
   ];
 
   return (
     <Box>
-      ·
       <Grid>
         <PageHeader
           title="Categories"
@@ -50,14 +59,23 @@ export function Categories() {
           { title: 'Name', field: 'name' },
           { title: 'Description', field: 'description' },
         ]}
-        data={[
-          {
-            name: 'Donna',
-            description: 'Hello there',
-          },
-        ]}
+        data={data?.data || []}
         overflowActions={overflowActions}
         setSelectedRow={setSelectedRow}
+        selectedRow={selectedRow}
+      />
+      <CreateCategoryModal
+        open={createModalOpen}
+        setModalStatus={setCreateModalOpen}
+      />
+      <UpdateCategoryModal
+        open={updateModalOpen}
+        setModalStatus={setUpdateModalOpen}
+        selectedRow={selectedRow}
+      />
+      <DeleteCategoryModal
+        open={deleteModalOpen}
+        setModalStatus={setDeleteModalOpen}
         selectedRow={selectedRow}
       />
     </Box>

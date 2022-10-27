@@ -61,14 +61,14 @@ export interface MaterialTableProps {
   data: Record<string, unknown>[];
   actions?: Action<Record<string, unknown>>[];
   overflowActions?: {
-    callback: (arg0: object) => void;
+    callback: (arg0: any) => void;
     icon: ReactNode;
     label: string;
     hidden?: boolean;
     disabled?: boolean;
   }[];
-  setSelectedRow?: Dispatch<SetStateAction<Record<string, unknown>>>;
-  selectedRow?: Record<string, unknown>;
+  setSelectedRow?: Dispatch<SetStateAction<any>>;
+  selectedRow?: any;
 }
 
 export function OctaMaterialTable(props: MaterialTableProps) {
@@ -94,9 +94,10 @@ export function OctaMaterialTable(props: MaterialTableProps) {
         options={{
           pageSize: 10,
           pageSizeOptions: [5, 10, 20],
+          maxColumnSort: 2,
           ...options,
         }}
-        columns={columns}
+        columns={[...columns]}
         data={data}
         actions={[
           {

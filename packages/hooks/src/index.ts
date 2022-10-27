@@ -1,1 +1,1 @@
-export * from './lib/core/useFetchCategories';
+export * from './lib/core/category';
