@@ -42,13 +42,13 @@ export function SidebarItem(props: SidebarItemProps) {
           borderRadius: '0.5rem',
         }}
       >
-        <ListItemIcon sx={{ color: isMatched ? 'secondary.dark' : undefined }}>
+        <ListItemIcon sx={{ color: isMatched ? 'primary.dark' : undefined }}>
           {icon}
         </ListItemIcon>
         <ListItemText
           primary={label}
           sx={{
-            color: isMatched ? 'secondary.dark' : undefined,
+            color: isMatched ? 'primary.dark' : undefined,
           }}
           primaryTypographyProps={{
             sx: {

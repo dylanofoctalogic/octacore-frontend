@@ -34,13 +34,13 @@ export function AppSidebarItem(props: AppSidebarItemProps) {
         }}
       >
         <Grid item xs={12} container justifyContent="center">
-          <Icon sx={{ color: isMatched ? 'secondary.dark' : undefined }}>
+          <Icon sx={{ color: isMatched ? 'primary.dark' : undefined }}>
             {icon}
           </Icon>
         </Grid>
         <Typography
           variant="caption"
-          sx={{ color: isMatched ? 'secondary.dark' : undefined }}
+          sx={{ color: isMatched ? 'primary.dark' : undefined }}
         >
           {label}
         </Typography>
