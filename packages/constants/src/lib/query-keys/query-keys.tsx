@@ -10,5 +10,11 @@ export const queryKeys = createQueryKeyStore({
   client: {
     read: null,
   },
+  technology: {
+    read: null,
+  },
+  project: {
+    read: null,
+  },
 });
 
