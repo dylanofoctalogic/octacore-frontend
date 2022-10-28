@@ -10,23 +10,23 @@ import { useSnackbar } from 'notistack';
 import { useQueryClient } from '@tanstack/react-query';
 import { Formik, Form } from 'formik';
 
-import { Category, DeleteCategoryPayload } from '@octalogic-admin/interfaces';
-import { deleteCategorySchema } from '../schemas';
-import { useDeleteCategories } from '@octalogic-admin/hooks';
+import { Client, DeleteClientPayload } from '@octalogic-admin/interfaces';
+import { deleteClientSchema } from '../schemas';
+import { useDeleteClients } from '@octalogic-admin/hooks';
 import { queryKeys } from '@octalogic-admin/constants';
 
 /* eslint-disable-next-line */
-export interface DeleteCategoryModalProps {
+export interface DeleteClientModalProps {
   open: boolean;
   setModalStatus: (status: boolean) => void;
-  selectedRow: Category | null;
+  selectedRow: Client | null;
 }
 
-export function DeleteCategoryModal(props: DeleteCategoryModalProps) {
+export function DeleteClientModal(props: DeleteClientModalProps) {
   const { open, setModalStatus, selectedRow } = props;
   const { enqueueSnackbar } = useSnackbar();
   const queryClient = useQueryClient();
-  const { mutate: deleteCategory } = useDeleteCategories();
+  const { mutate: deleteClient } = useDeleteClients();
 
   const handleClose = () => {
     setModalStatus(false);
@@ -38,20 +38,20 @@ export function DeleteCategoryModal(props: DeleteCategoryModalProps) {
         id: selectedRow?.id || 0,
       }}
       enableReinitialize
-      validationSchema={deleteCategorySchema}
+      validationSchema={deleteClientSchema}
       onSubmit={(
-        values: DeleteCategoryPayload,
+        values: DeleteClientPayload,
         { setSubmitting, resetForm }
       ) => {
         const payload = { ...values };
-        deleteCategory(payload, {
+        deleteClient(payload, {
           onSuccess(data) {
             enqueueSnackbar(data.message, { variant: 'success' });
             setSubmitting(false);
             resetForm();
             handleClose();
             setTimeout(() => {
-              queryClient.invalidateQueries([queryKeys.category.read]);
+              queryClient.invalidateQueries([queryKeys.client.read]);
             }, 500);
           },
         });
@@ -60,7 +60,7 @@ export function DeleteCategoryModal(props: DeleteCategoryModalProps) {
       {({ submitForm, isSubmitting }) => (
         <Form>
           <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-            <DialogTitle>Delete Category "{selectedRow?.name}"?</DialogTitle>
+            <DialogTitle>Delete Client "{selectedRow?.name}"?</DialogTitle>
             <DialogContent>
               <DialogContentText>
                 This action is non-reversible. Once confirmed the record will
@@ -74,7 +74,7 @@ export function DeleteCategoryModal(props: DeleteCategoryModalProps) {
                 onClick={submitForm}
                 variant="contained"
               >
-                Delete Category
+                Delete Client
               </Button>
             </DialogActions>
           </Dialog>
@@ -84,4 +84,4 @@ export function DeleteCategoryModal(props: DeleteCategoryModalProps) {
   );
 }
 
-export default DeleteCategoryModal;
+export default DeleteClientModal;
