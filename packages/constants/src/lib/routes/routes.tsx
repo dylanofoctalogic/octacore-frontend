@@ -90,10 +90,31 @@ const supportSidebarConfig = [
   },
 ];
 
+const documentRoutes = {
+  home: '/',
+  proposals: 'proposals',
+  invoices: 'invoices',
+  receipts: 'receipts',
+};
+
+const documentSidebarConfig = [
+  {
+    path: documentRoutes.home,
+    icon: <DashboardIcon />,
+    label: 'Dashboard',
+  },
+  {
+    path: documentRoutes.proposals,
+    icon: <SupportAgentIcon />,
+    label: 'Proposals',
+  },
+];
+
 const appRoutes = {
   core: process.env['NX_CORE_WEBAPP_URL'],
   portfolio: process.env['NX_PORTFOLIO_WEBAPP_URL'],
   support: process.env['NX_SUPPORT_WEBAPP_URL'],
+  documents: process.env['NX_DOCUMENTS_WEBAPP_URL'],
 };
 
 const appSidebarConfig = [
@@ -111,6 +132,11 @@ const appSidebarConfig = [
     path: appRoutes.support,
     icon: 'group',
     label: 'Support',
+  },
+  {
+    path: appRoutes.documents,
+    icon: 'description',
+    label: 'Documents',
   },
 ];
 
