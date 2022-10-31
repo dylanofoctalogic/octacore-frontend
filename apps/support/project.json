@@ -1,97 +1,101 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/support/src",
   "projectType": "application",
+  "sourceRoot": "apps/support/src",
+  "prefix": "octalogic-admin",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
-        "compiler": "babel",
         "outputPath": "dist/apps/support",
         "index": "apps/support/src/index.html",
-        "baseHref": "/",
-        "main": "apps/support/src/main.tsx",
+        "main": "apps/support/src/main.ts",
         "polyfills": "apps/support/src/polyfills.ts",
         "tsConfig": "apps/support/tsconfig.app.json",
-        "assets": ["apps/support/src/favicon.ico", "apps/support/src/assets"],
-        "styles": [],
-        "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack",
-        "postcssConfig": "apps/support/postcss.config.js"
+        "assets": [
+          "apps/support/src/favicon.ico",
+          "apps/support/src/assets"
+        ],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+          "apps/support/src/styles.css"
+        ],
+        "scripts": []
       },
       "configurations": {
-        "development": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true
-        },
         "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
           "fileReplacements": [
             {
               "replace": "apps/support/src/environments/environment.ts",
               "with": "apps/support/src/environments/environment.prod.ts"
             }
           ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
-      "defaultConfiguration": "development",
+      "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "buildTarget": "support:build",
-        "hmr": true,
-        "port": 3002,
-        "proxyConfig": "apps/support/proxy.conf.json"
+        "port": 3002
       },
       "configurations": {
-        "development": {
-          "buildTarget": "support:build:development"
-        },
         "production": {
-          "buildTarget": "support:build:production",
-          "hmr": false
+          "browserTarget": "support:build:production"
+        },
+        "development": {
+          "browserTarget": "support:build:development"
         }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "support:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/support/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "apps/support/**/*.ts",
+          "apps/support/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/support"],
+      "outputs": [
+        "coverage/apps/support"
+      ],
       "options": {
         "jestConfig": "apps/support/jest.config.ts",
         "passWithNoTests": true
-      }
-    },
-    "deploy:develop": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [],
-        "cwd": "apps/support",
-        "parallel": false
-      }
-    },
-    "deploy:prod": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [],
-        "cwd": "apps/support",
-        "parallel": false
       }
     }
   },

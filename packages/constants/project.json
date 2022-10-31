@@ -6,14 +6,20 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["packages/constants/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "packages/constants/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/constants"],
+      "outputs": [
+        "coverage/packages/constants"
+      ],
       "options": {
         "jestConfig": "packages/constants/jest.config.ts",
         "passWithNoTests": true
