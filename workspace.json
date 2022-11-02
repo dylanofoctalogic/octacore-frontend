@@ -10,6 +10,7 @@
     "interfaces": "packages/interfaces",
     "layouts": "packages/layouts",
     "portfolio": "apps/portfolio",
-    "support": "apps/support"
+    "support": "apps/support",
+    "website": "apps/website"
   }
 }
