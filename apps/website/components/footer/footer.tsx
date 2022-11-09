@@ -12,8 +12,8 @@ const FooterLink = ({ name, href }) => {
   return (
     <Box
       sx={{
-        flex: '0 0 16.666667%',
-        maxWidth: '16.666667%',
+        flex: { xs: '0 0 33.333333%', sm: '0 0 16.666667%' },
+        maxWidth: { xs: '33.333333%', sm: '16.666667%' },
         textAlign: 'center',
         padding: '0.25rem',
       }}
@@ -26,8 +26,8 @@ const FooterLink = ({ name, href }) => {
           textTransform: 'unset',
           fontSize: '1rem',
           fontWeight: '400',
-          paddingLeft: '1rem',
-          paddingRight: '1rem',
+          // paddingLeft: '1rem',
+          // paddingRight: '1rem',
           opacity: '0.70',
           transition: 'opacity 0.2s',
           ':hover': {

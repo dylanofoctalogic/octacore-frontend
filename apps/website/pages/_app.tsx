@@ -8,6 +8,7 @@ import theme from '../utils/theme';
 import createEmotionCache from '../utils/createEmotionCache';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
+import MobileSpeedDial from '../components/speed-dial/speed-dial';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -30,6 +31,7 @@ export default function MyApp(props: MyAppProps) {
           <Header />
           <Component {...pageProps} />
           <Footer />
+          <MobileSpeedDial />
         </>
       </ThemeProvider>
     </CacheProvider>
