@@ -1,8 +1,12 @@
+import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
 import Image from 'next/image';
+import NextLink from 'next/link';
 
 import Link from '../link/link';
+
+import { Socials } from '../../constants/socials';
 
 const FooterLink = ({ name, href }) => {
   return (
@@ -37,11 +41,35 @@ const FooterLink = ({ name, href }) => {
   );
 };
 
+const SocialLinks = ({ socials }) => {
+  return socials.map((social) => (
+    <Box
+      key={social.name}
+      sx={{
+        opacity: '0.70',
+        transition: 'opacity 0.2s',
+        ':hover': {
+          opacity: '1',
+        },
+      }}
+    >
+      <a href={social.link} target="_blank" rel="noreferrer">
+        <Image
+          src={social.iconUrl}
+          alt={`${social.name} logo`}
+          width={16}
+          height={16}
+          style={{ cursor: 'pointer' }}
+        />
+      </a>
+    </Box>
+  ));
+};
+
 export function Footer() {
   return (
     <Box
       sx={{
-        borderTop: '1px solid #000',
         height: '22.375rem',
         display: 'flex',
         flexDirection: 'column',
@@ -49,14 +77,16 @@ export function Footer() {
         width: '100%',
       }}
     >
-      <Box sx={{ marginTop: '3rem' }}>
-        <Image
-          src="/octalogic.svg"
-          alt="Octalogic logo"
-          width={60}
-          height={60}
-          style={{ cursor: 'pointer' }}
-        />
+      <Box sx={{ marginTop: '3rem', display: 'flex' }}>
+        <NextLink href={'/'}>
+          <Image
+            src="/images/logos/octalogic.svg"
+            alt="Octalogic logo"
+            width={60}
+            height={60}
+            style={{ cursor: 'pointer' }}
+          />
+        </NextLink>
       </Box>
       <Box
         sx={{
@@ -64,6 +94,7 @@ export function Footer() {
           flexDirection: 'column',
           alignItems: 'center',
           marginTop: '3rem',
+          marginBottom: '3rem',
           width: '100%',
         }}
       >
@@ -72,7 +103,7 @@ export function Footer() {
             display: 'flex',
             width: '100%',
             justifyContent: 'center',
-            marginBottom: '0.5rem',
+            marginBottom: '0.187rem',
           }}
         >
           <FooterLink name={'Contact'} href={'contact'} />
@@ -84,7 +115,7 @@ export function Footer() {
             display: 'flex',
             width: '100%',
             justifyContent: 'center',
-            marginBottom: '0.5rem',
+            marginBottom: '0.187rem',
           }}
         >
           <FooterLink name={'Privacy'} href={'privacy-policy'} />
@@ -96,7 +127,7 @@ export function Footer() {
             display: 'flex',
             width: '100%',
             justifyContent: 'center',
-            marginBottom: '0.5rem',
+            marginBottom: '0.187rem',
           }}
         >
           <FooterLink name={'Terms of Service'} href={'terms-of-service'} />
@@ -107,13 +138,26 @@ export function Footer() {
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
-          marginTop: '3rem',
+          marginBottom: '0.5rem',
+          gap: '1rem',
         }}
       >
-        Socials
+        <SocialLinks socials={Socials} />
       </Box>
+      <Typography
+        component="div"
+        sx={{
+          fontSize: '.80rem',
+          textAlign: 'center',
+          opacity: '0.60',
+          color: '#212529',
+          paddingBottom: '0.5rem',
+          lineHeight: '.80rem',
+        }}
+      >
+        © 2017 - 2022, Octalogic Tech LLP. All rights reserved
+      </Typography>
     </Box>
   );
 }

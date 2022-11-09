@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -55,7 +56,6 @@ function Header(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const router = useRouter();
-  console.log('router path', router.pathname);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -66,13 +66,14 @@ function Header(props: Props) {
       <Box
         sx={{ display: 'flex', padding: '1rem 1rem', justifyContent: 'center' }}
       >
-        <Image
-          src="/octalogic.svg"
-          alt="Octalogic logo"
-          width={60}
-          height={60}
-          style={{ cursor: 'pointer' }}
-        />
+        <NextLink href={'/'}>
+          <Image
+            src="/images/logos/octalogic.svg"
+            alt="Octalogic logo"
+            width={60}
+            height={60}
+          />
+        </NextLink>
       </Box>
       <Divider />
       <List>
@@ -144,12 +145,13 @@ function Header(props: Props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar
+        position="relative"
         component="nav"
         sx={{
           backgroundColor: 'transparent',
-          height: '6.375rem',
+          height: '7.25rem',
           justifyContent: 'center',
-          padding: { sm: '0 3rem' },
+          padding: { sm: '0 2rem' },
           boxShadow: 'none',
         }}
       >
@@ -165,15 +167,20 @@ function Header(props: Props) {
           </IconButton>
           <Box
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', sm: 'flex' },
+              alignItems: 'center',
+            }}
           >
-            <Image
-              src="/octalogic.svg"
-              alt="Octalogic logo"
-              width={60}
-              height={60}
-              style={{ cursor: 'pointer' }}
-            />
+            <NextLink href={'/'}>
+              <Image
+                src="/images/logos/octalogic.svg"
+                alt="Octalogic logo"
+                width={60}
+                height={60}
+              />
+            </NextLink>
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navLinks(navItems)}
