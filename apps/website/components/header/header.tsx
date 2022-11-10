@@ -149,7 +149,7 @@ function Header(props: Props) {
         component="nav"
         sx={{
           backgroundColor: 'transparent',
-          height: '7.25rem',
+          height: { xs: '3.25rem', sm: '7.25rem' },
           justifyContent: 'center',
           padding: { sm: '0 2rem' },
           boxShadow: 'none',
