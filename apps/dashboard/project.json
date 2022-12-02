@@ -5,9 +5,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/web:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
@@ -69,27 +67,21 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/dashboard/**/*.{ts,tsx,js,jsx}"
-        ]
+        "lintFilePatterns": ["apps/dashboard/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/dashboard"
-      ],
+      "outputs": ["coverage/apps/dashboard"],
       "options": {
         "jestConfig": "apps/dashboard/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "deploy:develop": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "cp robots.txt dist/robots.txt",
@@ -100,7 +92,7 @@
       }
     },
     "deploy:prod": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "cp robots.txt dist/robots.txt",

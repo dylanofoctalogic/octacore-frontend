@@ -37,20 +37,14 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/documents/**/*.{ts,tsx,vue}"
-        ]
+        "lintFilePatterns": ["apps/documents/**/*.{ts,tsx,vue}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/documents"
-      ],
+      "outputs": ["coverage/apps/documents"],
       "options": {
         "jestConfig": "apps/documents/jest.config.ts",
         "passWithNoTests": true
