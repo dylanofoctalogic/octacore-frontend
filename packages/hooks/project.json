@@ -1,4 +1,5 @@
 {
+  "name": "hooks",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/hooks/src",
   "projectType": "library",
@@ -12,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/hooks"],
+      "outputs": ["{workspaceRoot}/coverage/packages/hooks"],
       "options": {
         "jestConfig": "packages/hooks/jest.config.ts",
         "passWithNoTests": true
