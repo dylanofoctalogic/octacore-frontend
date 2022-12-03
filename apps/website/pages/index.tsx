@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import HorizontalRule from '../components/horizontal-rule/horizontal-rule';
 
+// Test comment
 const Home = () => {
   return (
     <>
