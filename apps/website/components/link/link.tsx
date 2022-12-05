@@ -38,7 +38,7 @@ export const NextLinkComposed = React.forwardRef<
   return (
     <NextLink
       href={to}
-      prefetch={false}
+      prefetch={prefetch}
       as={linkAs}
       replace={replace}
       scroll={scroll}
